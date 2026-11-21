@@ -1,0 +1,15 @@
+Lead Manager Project 
+
+
+1) Backend
+
+	1) install all packages like express, cookie-parser, jwt, mongoose, bcrypt, cors, dotenv
+	2) make basic app.js, server.js
+	3) connect database to server
+	4) make user schema and user model and auth routes and auth controller
+	5) make login and register api
+	6) make lead schema/model, lead routes and lead controller
+	7) make CRUD APIs
+	8) make auth middleware
+
+2) Frontend

@@ -111,4 +111,43 @@ const login = async (req, res) => {
   });
 };
 
-module.exports = { register, login };
+const getMe = async (req, res) => {
+    try {
+        const user = await userModel
+            .findById(req.user.id)
+            .select("name email");
+
+        if (!user) {
+            return res.status(401).json({
+                message: "User not found"
+            });
+        }
+
+        return res.status(200).json({
+            user: {
+                id: user._id,
+                name: user.name,
+                email: user.email
+            }
+        });
+
+    } catch (error) {
+        return res.status(500).json({
+            message: "Server error"
+        });
+    }
+};
+
+const logout = (req, res) => {
+    res.clearCookie("token", {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "lax"
+    });
+
+    return res.status(200).json({
+        message: "Logged out successfully"
+    });
+};
+
+module.exports = { register, login, getMe, logout };
