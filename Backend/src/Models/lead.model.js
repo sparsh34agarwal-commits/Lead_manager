@@ -18,7 +18,7 @@ const leadSchema = new mongoose.Schema({
 
     phone: {
         type: String,
-        required: true,
+        default: "N/A",
         trim: true
     },
 
@@ -31,7 +31,7 @@ const leadSchema = new mongoose.Schema({
     source: {
         type: String,
         required: true,
-        enum: ["Website", "LinkedIn", "Referral", "Cold Call", "Other"]
+        enum: ["Website", "LinkedIn", "Referral", "ColdCall", "Other"]
     },
 
     status: {

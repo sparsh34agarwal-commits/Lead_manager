@@ -49,9 +49,9 @@ const register = async (req, res) => {
   res.status(201).json({
     message: "User Registered Successfully",
     user: {
+      id: user._id,
       name: user.name,
       email: user.email,
-      pass: user.pass, //remove
     },
   });
 };
@@ -103,10 +103,9 @@ const login = async (req, res) => {
   res.status(200).json({
     message: "Login Successful",
     user: {
-      id: user._id, //remove
+      id: user._id,
       name: user.name,
       email: user.email,
-      pass: user.pass, //remove
     },
   });
 };

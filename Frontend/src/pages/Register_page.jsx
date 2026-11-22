@@ -1,8 +1,39 @@
-import React from "react";
+import React, { useState, useContext } from "react";
 import { Icon } from "@iconify/react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import api from "../services/api";
+import { AuthContext } from "../context/AuthContext";
 
 const Register_page = () => {
+  const [name, setname] = useState("");
+  const [email, setemail] = useState("");
+  const [pass, setpass] = useState("");
+  const [error, seterror] = useState("");
+  const [loading, setloading] = useState(false);
+
+  const { setUser } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const RegisterHandler = async (e) => {
+    e.preventDefault();
+    seterror("");
+    setloading(true);
+
+    try {
+      const res = await api.post("/auth/register", {
+        name,
+        email,
+        pass,
+      });
+      setUser(res.data.user);
+      navigate("/dashboard");
+    } 
+    catch (err) {
+      seterror(err.response?.data?.message || "something went wrong");
+    }
+    finally{
+      setloading(false);
+    }
+  };
   return (
     <div className="select-none">
       <div className="page flex flex-col items-center h-screen w-full bg-[#FCECED] justify-center gap-8">
@@ -20,7 +51,8 @@ const Register_page = () => {
         <div className="form bg-white flex flex-col gap-4 py-4 rounded-[12px]">
           <div className="px-6">
             <div className="flex bg-[#FCECED] p-1 rounded-[8px]">
-              <Link to={"/login"}
+              <Link
+                to={"/login"}
                 type="button"
                 className="w-1/2 py-1.5 text-center text-gray-600 rounded-[6px] cursor-pointer"
               >
@@ -41,7 +73,7 @@ const Register_page = () => {
               Start Creating Your Account By Filling Necessary Details
             </p>
           </div>
-          <form className="flex flex-col gap-4" action="">
+          <form onSubmit={RegisterHandler} className="flex flex-col gap-4" action="">
             <div className="form flex flex-col gap-3">
               <div className="name flex flex-col px-6 gap-1">
                 <label>Full Name</label>
@@ -53,6 +85,10 @@ const Register_page = () => {
                   />
                   <input
                     className="bg-[#FCECED] w-full py-2 pl-10 pr-3 rounded-[8px]"
+                    name="name"
+                    value={name}
+                    required
+                    onChange={(e)=>setname(e.target.value)}
                     type="text"
                     placeholder="John Doe"
                   />
@@ -70,7 +106,11 @@ const Register_page = () => {
                   <input
                     className="bg-[#FCECED] w-full py-2 pl-10 pr-3 rounded-[8px]"
                     type="email"
-                    placeholder="John@example.com"
+                    name="email"
+                    value={email}
+                    required
+                    onChange={(e)=>setemail(e.target.value)}
+                    placeholder="Johh@example.com"
                   />
                 </div>
               </div>
@@ -87,10 +127,18 @@ const Register_page = () => {
                     className="bg-[#FCECED] w-full py-2 pl-10 pr-3 rounded-[8px]"
                     type="password"
                     placeholder="*********"
+                    name="pass"
+                    value={pass}
+                    required
+                    onChange={(e)=>setpass(e.target.value)}
+                    
                   />
                 </div>
               </div>
             </div>
+            <div className="m-auto">
+                {error && <p className="text-red-600 text-sm px-6">{error}</p>}
+              </div>
             <div className="tnc px-6 flex items-center gap-1">
               <input className="size-4" type="checkbox" name="tnc" id="tnc" />
               <label>
@@ -111,9 +159,10 @@ const Register_page = () => {
             <div className="Create px-6">
               <button
                 type="submit"
+                disabled={loading}
                 className="w-full bg-[#BA002A] p-2 text-white rounded-[10px] font-bold flex items-center justify-center gap-2 cursor-pointer transition-transform duration-300 ease-out hover:scale-105 active:scale-95 active:duration-75"
               >
-                <span>Create Account</span>
+                <span>{loading ? "Creating Account..." : "Create Account"}</span>
                 <Icon icon="ph:arrow-right-bold" height="1.3em" />
               </button>
             </div>
@@ -121,7 +170,10 @@ const Register_page = () => {
             <div className="text-center">
               <p className="text-gray-600 text-sm">
                 Already registered?{" "}
-                <Link to={"/login"} className="text-[#BA002A] font-semibold cursor-pointer">
+                <Link
+                  to={"/login"}
+                  className="text-[#BA002A] font-semibold cursor-pointer"
+                >
                   Sign in
                 </Link>
               </p>
