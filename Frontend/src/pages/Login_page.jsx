@@ -7,6 +7,7 @@ import { AuthContext } from "../context/AuthContext";
 const Login_page = () => {
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
+  const [showPass, setShowPass] = useState(false);
 
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -101,31 +102,28 @@ const Login_page = () => {
                     className="absolute left-2.5 top-1/2 -translate-y-1/2 text-black"
                   />
                   <input
-                    className="bg-[#FCECED] w-full py-2 pl-10 pr-3 rounded-[8px]"
-                    type="password"
+                    className="bg-[#FCECED] w-full py-2 pl-10 pr-10 rounded-[8px]"
+                    type={showPass ? "text" : "password"}
                     name="pass"
                     value={pass}
                     onChange={(e) => setPass(e.target.value)}
                     placeholder="*********"
                     required
                   />
+                  <button
+                    type="button"
+                    onClick={() => setShowPass(!showPass)}
+                    className="absolute right-2.5 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-800 cursor-pointer"
+                  >
+                    <Icon icon={showPass ? "ph:eye-slash-bold" : "ph:eye-bold"} height="1.2em" />
+                  </button>
                 </div>
               </div>
             </div>
 
             <div className="remember px-6 flex  items-center gap-2">
-              <input
-                type="checkbox"
-                id="remember"
-                className="size-4 cursor-pointer"
-              />
-              <label
-                htmlFor="remember"
-                className="text-gray-600 text-sm cursor-pointer"
-              >
-                Remember me
-              </label>
-              <div className="ml-auto">
+              
+              <div className="m-auto">
                 {error && <p className="text-red-600 text-sm px-6">{error}</p>}
               </div>
             </div>

@@ -8,6 +8,7 @@ const Register_page = () => {
   const [name, setname] = useState("");
   const [email, setemail] = useState("");
   const [pass, setpass] = useState("");
+  const [showPass, setShowPass] = useState(false);
   const [error, seterror] = useState("");
   const [loading, setloading] = useState(false);
 
@@ -124,15 +125,21 @@ const Register_page = () => {
                     className="absolute left-2.5 top-1/2 -translate-y-1/2 text-gray-900"
                   />
                   <input
-                    className="bg-[#FCECED] w-full py-2 pl-10 pr-3 rounded-[8px]"
-                    type="password"
+                    className="bg-[#FCECED] w-full py-2 pl-10 pr-10 rounded-[8px]"
+                    type={showPass ? "text" : "password"}
                     placeholder="*********"
                     name="pass"
                     value={pass}
                     required
                     onChange={(e)=>setpass(e.target.value)}
-                    
                   />
+                  <button
+                    type="button"
+                    onClick={() => setShowPass(!showPass)}
+                    className="absolute right-2.5 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-800 cursor-pointer"
+                  >
+                    <Icon icon={showPass ? "ph:eye-slash-bold" : "ph:eye-bold"} height="1.2em" />
+                  </button>
                 </div>
               </div>
             </div>
@@ -140,7 +147,7 @@ const Register_page = () => {
                 {error && <p className="text-red-600 text-sm px-6">{error}</p>}
               </div>
             <div className="tnc px-6 flex items-center gap-1">
-              <input className="size-4" type="checkbox" name="tnc" id="tnc" />
+              <input className="size-4 cursor-pointer" type="checkbox" name="tnc" id="tnc" required />
               <label>
                 I agree to the{" "}
                 <span className="text-[#BA002A]">

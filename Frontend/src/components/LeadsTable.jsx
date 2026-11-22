@@ -158,7 +158,7 @@ const LeadsTable = (props) => {
                     className={`bg-amber-300 w-9 h-9 rounded-xl flex items-center justify-center font-bold text-xs shrink-0`}
                   >
                     <img
-                      src={`https://api.dicebear.com/9.x/notionists/svg?seed=${encodeURIComponent(lead.id)}`}
+                      src={`https://api.dicebear.com/9.x/notionists/svg?seed=${encodeURIComponent(lead._id)}`}
                       loading="lazy"
                       className="w-9 h-9 rounded-xl object-cover bg-amber-100 shrink-0 border border-gray-200"
                     />
