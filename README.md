@@ -36,7 +36,8 @@ A full stack lead management application built for the Meru Technosoft Full Stac
 
 ## What I would improve with more time
 
-- will Add pagination
+- will try to Add pagination
+- Will try to Add Delete Account of User Feature
 - will try to Add sorting for larger lead lists.
 - will Add automated tests for registration, login, validation, CRUD operations, and ownership isolation.
 - Standardize API error responses and improve loading, empty, and network-error states.
