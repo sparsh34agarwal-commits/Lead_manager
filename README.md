@@ -42,10 +42,6 @@ A full stack lead management application built for the Meru Technosoft Full Stac
 - Standardize API error responses and improve loading, empty, and network-error states.
 - Add more complete phone-number validation and request rate limiting for authentication endpoints.
 
-## Short submission note
-Although i am very happy with this project overall, as It is My First Solo Full Stack Application
-I am particularly proud of the user-specific lead ownership how each lead is linked to its creator, and the API scopes lead operations to the authenticated user. The trickiest part was connecting cookie-based JWT authentication across the React frontend and Express backend, including restoring the session after a page refresh.
-
 ## Tech stack
 
 | Layer | Technologies |
