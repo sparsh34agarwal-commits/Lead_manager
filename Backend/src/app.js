@@ -17,5 +17,12 @@ app.use(cookieParser());
 app.use("/api/auth", authroutes);
 app.use("/api/leads", leadroutes);
 
+app.get("/api/health", (req, res) => {
+    res.status(200).json({
+        status: "OK",
+        message: "Lead Manager API is running"
+    });
+});
+
 
 module.exports=app;
