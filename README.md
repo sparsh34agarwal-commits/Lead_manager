@@ -52,6 +52,11 @@ A full stack lead management application built for the Meru Technosoft Full Stac
 | Authentication | JSON Web Tokens, bcrypt, HTTP-only cookies |
 | Hosting | Vercel (frontend), Render (backend), MongoDB Atlas (database) |
 
+## Demo Credentials
+Email - sparsh@me.com
+
+Password - sparsh@123
+
 ## Run locally
 
 ### Prerequisites
