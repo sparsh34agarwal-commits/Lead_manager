@@ -15,6 +15,7 @@ const Dashboard = () => {
   const [ActiveStatus, setActiveStatus] = useState("all");
   const [SearchQuery, setSearchQuery] = useState("");
   const [ActiveSource, setActiveSource] = useState("all");
+  const [activeTab, setActiveTab] = useState("dashboard");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
@@ -75,7 +76,7 @@ const Dashboard = () => {
   return (
     <div className="min-h-screen bg-[#cbead4] text-gray-800 p-4 sm:p-6 lg:p-8 flex flex-col gap-6 font-sans">
       {/* 1. Top Navigation Bar */}
-      <Navbar />
+      <Navbar activeTab={activeTab} setActiveTab={setActiveTab} />
 
       {/* 2. Main Page Header */}
       <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 mt-2">
@@ -108,30 +109,34 @@ const Dashboard = () => {
       </div>
 
       {/* 3. Stats Overview Cards */}
-      <StatsCards leads={Leads} />
+      {(activeTab === "dashboard" || activeTab === "analytics") && (
+        <StatsCards leads={Leads} />
+      )}
 
       {/* 4. Leads Management Data Table Card */}
-      <div className="bg-white rounded-2xl border border-gray-200/60 shadow-xs overflow-hidden">
-        {/* Search & Filter Toolbar */}
-        <FilterBar
-          leads={Leads}
-          ActiveStatus={ActiveStatus}
-          setActiveStatus={setActiveStatus}
-          SearchQuery={SearchQuery}
-          setSearchQuery={setSearchQuery}
-          ActiveSource={ActiveSource}
-          setActiveSource={setActiveSource}
-        />
+      {(activeTab === "dashboard" || activeTab === "leads") && (
+        <div className="bg-white rounded-2xl border border-gray-200/60 shadow-xs overflow-hidden">
+          {/* Search & Filter Toolbar */}
+          <FilterBar
+            leads={Leads}
+            ActiveStatus={ActiveStatus}
+            setActiveStatus={setActiveStatus}
+            SearchQuery={SearchQuery}
+            setSearchQuery={setSearchQuery}
+            ActiveSource={ActiveSource}
+            setActiveSource={setActiveSource}
+          />
 
-        {/* Leads Table */}
-        <LeadsTable
-          leads={FilteredLeads}
-          onEdit={handleEditClick}
-          onDelete={handleDeleteClick}
-          isEditModalOpen={isEditModalOpen}
-          setIsEditModalOpen={setIsEditModalOpen}
-        />
-      </div>
+          {/* Leads Table */}
+          <LeadsTable
+            leads={FilteredLeads}
+            onEdit={handleEditClick}
+            onDelete={handleDeleteClick}
+            isEditModalOpen={isEditModalOpen}
+            setIsEditModalOpen={setIsEditModalOpen}
+          />
+        </div>
+      )}
 
       {/* 5. Footer */}
       <Footer />

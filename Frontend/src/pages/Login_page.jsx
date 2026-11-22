@@ -121,10 +121,9 @@ const Login_page = () => {
               </div>
             </div>
 
-            <div className="remember px-6 flex  items-center gap-2">
-              
+            <div className="remember px-6 flex items-center justify-center">
               <div className="m-auto">
-                {error && <p className="text-red-600 text-sm px-6">{error}</p>}
+                {error && <p className="text-red-600 text-sm">{error}</p>}
               </div>
             </div>
 

@@ -3,7 +3,7 @@ import { Icon } from "@iconify/react";
 import { AuthContext } from "../context/AuthContext";
 
 // Top navigation bar component
-const Navbar = () => {
+const Navbar = ({ activeTab = "dashboard", setActiveTab }) => {
   const { user, logout } = useContext(AuthContext);
 
   return (
@@ -26,19 +26,34 @@ const Navbar = () => {
         <div className="hidden md:flex items-center bg-[#E6ECE8] p-1 rounded-xl gap-1">
           <button
             type="button"
-            className="px-4 py-1.5 text-sm font-semibold text-gray-900 bg-red-300 rounded-lg shadow-xs cursor-pointer transition"
+            onClick={() => setActiveTab && setActiveTab("dashboard")}
+            className={`px-4 py-1.5 text-sm font-semibold rounded-lg cursor-pointer transition ${
+              activeTab === "dashboard"
+                ? "bg-red-700 text-white shadow-xs"
+                : "text-gray-600 hover:text-gray-900 hover:bg-gray-200/60"
+            }`}
           >
             Dashboard
           </button>
           <button
             type="button"
-            className="px-4 py-1.5 text-sm font-medium text-gray-600 hover:text-gray-900 rounded-lg cursor-pointer transition"
+            onClick={() => setActiveTab && setActiveTab("leads")}
+            className={`px-4 py-1.5 text-sm font-semibold rounded-lg cursor-pointer transition ${
+              activeTab === "leads"
+                ? "bg-red-700 text-white shadow-xs"
+                : "text-gray-600 hover:text-gray-900 hover:bg-gray-200/60"
+            }`}
           >
             All Leads
           </button>
           <button
             type="button"
-            className="px-4 py-1.5 text-sm font-medium text-gray-600 hover:text-gray-900 rounded-lg cursor-pointer transition"
+            onClick={() => setActiveTab && setActiveTab("analytics")}
+            className={`px-4 py-1.5 text-sm font-semibold rounded-lg cursor-pointer transition ${
+              activeTab === "analytics"
+                ? "bg-red-700 text-white shadow-xs"
+                : "text-gray-600 hover:text-gray-900 hover:bg-gray-200/60"
+            }`}
           >
             Analytics
           </button>
