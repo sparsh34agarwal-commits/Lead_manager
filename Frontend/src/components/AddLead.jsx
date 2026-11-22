@@ -40,7 +40,7 @@ const AddLead = ({ isOpen = true, onClose, onLeadCreated }) => {
       const newLeadData = {
         name,
         email,
-        phone: phone || "N/A",
+        phone,
         company,
         source,
         status,
@@ -142,10 +142,11 @@ const AddLead = ({ isOpen = true, onClose, onLeadCreated }) => {
             {/* Phone Number */}
             <div className="flex flex-col gap-1.5">
               <label className="text-xs font-semibold text-gray-700">
-                Phone Number
+                Phone Number <span className="text-red-500">*</span>
               </label>
               <input
                 type="tel"
+                required
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
                 placeholder="+1 (555) 981-4422"

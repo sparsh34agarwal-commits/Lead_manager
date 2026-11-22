@@ -7,6 +7,7 @@ import LeadsTable from "../components/LeadsTable";
 import Footer from "../components/Footer";
 import AddLead from "../components/AddLead";
 import EditLead from "../components/EditLead";
+import DeleteLead from "../components/DeleteLead";
 import api from "../services/api";
 
 const Dashboard = () => {
@@ -19,6 +20,8 @@ const Dashboard = () => {
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [selectedLead, setSelectedLead] = useState(null);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [leadToDelete, setLeadToDelete] = useState(null);
 
   const FetchLeads = async () => {
     try {
@@ -41,14 +44,14 @@ const Dashboard = () => {
 
     if (ActiveStatus === "all") {
       StatusMatch = true;
-    } else if (lead.status.toLowerCase() === ActiveStatus) {
+    } else if (lead.status === ActiveStatus) {
       StatusMatch = true;
     }
     let SourceMatch = false;
 
     if (ActiveSource === "all") {
       SourceMatch = true;
-    } else if (lead.source.toLowerCase() === ActiveSource) {
+    } else if (lead.source === ActiveSource) {
       SourceMatch = true;
     }
 
@@ -58,6 +61,11 @@ const Dashboard = () => {
   const handleEditClick = (lead) => {
     setSelectedLead(lead);
     setIsEditModalOpen(true);
+  };
+
+  const handleDeleteClick = (lead) => {
+    setLeadToDelete(lead);
+    setIsDeleteModalOpen(true);
   };
 
   useEffect(() => {
@@ -119,6 +127,7 @@ const Dashboard = () => {
         <LeadsTable
           leads={FilteredLeads}
           onEdit={handleEditClick}
+          onDelete={handleDeleteClick}
           isEditModalOpen={isEditModalOpen}
           setIsEditModalOpen={setIsEditModalOpen}
         />
@@ -143,6 +152,17 @@ const Dashboard = () => {
           setSelectedLead(null);
         }}
         onLeadEdited={FetchLeads}
+      />
+
+      {/* 7. Delete Lead Confirmation Modal */}
+      <DeleteLead
+        lead={leadToDelete}
+        isOpen={isDeleteModalOpen}
+        onClose={() => {
+          setIsDeleteModalOpen(false);
+          setLeadToDelete(null);
+        }}
+        onLeadDeleted={FetchLeads}
       />
     </div>
   );

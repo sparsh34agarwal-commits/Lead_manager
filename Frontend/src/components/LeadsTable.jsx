@@ -122,10 +122,23 @@ const LeadsTable = (props) => {
         {/* Table Body */}
         <tbody className="divide-y divide-gray-100 text-sm">
           
-          {
-            ld.length===0 ? (
-       <tr><td>"No Leads Found"</td></tr>) :
-          ld.map((lead) => (
+          {ld.length === 0 ? (
+            <tr>
+              <td colSpan={8} className="py-16 text-center">
+                <div className="flex flex-col items-center justify-center gap-2">
+                  <div className="w-12 h-12 rounded-full bg-[#FCECED] text-[#9E0C2A] flex items-center justify-center">
+                    <Icon icon="ph:magnifying-glass-bold" height="1.6em" />
+                  </div>
+                  <p className="text-base font-bold text-gray-800">
+                    No Leads Found
+                  </p>
+                  <p className="text-xs text-gray-400 max-w-sm">
+                    We couldn't find any leads matching your filters. Try adjusting your search query or source filter.
+                  </p>
+                </div>
+              </td>
+            </tr>
+          ) : ld.map((lead) => (
             <tr
               key={lead.id}
               className="hover:bg-[#F9FAF9] transition-colors group"
@@ -223,6 +236,7 @@ const LeadsTable = (props) => {
                     <Icon icon="ph:pencil-simple-line-bold" height="1.1em" />
                   </button>
                   <button
+                    onClick={() => props.onDelete && props.onDelete(lead)}
                     type="button"
                     title="Delete Lead"
                     className="p-1 hover:text-red-600 hover:bg-red-50 rounded cursor-pointer transition"
@@ -236,64 +250,7 @@ const LeadsTable = (props) => {
         </tbody>
       </table>
 
-      {/* Table Pagination Footer */}
-      <div className="px-6 py-4 border-t border-gray-100 flex flex-col sm:flex-row items-center justify-between gap-4 bg-white text-xs text-gray-500 font-medium">
-        {/* Count and rows selector */}
-        <div className="flex items-center gap-4">
-          <span>Showing 1-7 of 1,284 leads</span>
-          <div className="flex items-center gap-1.5">
-            <span>Per page:</span>
-            <button
-              type="button"
-              className="flex items-center gap-1 border border-gray-200 rounded px-2 py-1 bg-white hover:bg-gray-50 cursor-pointer"
-            >
-              <span>10</span>
-              <Icon icon="ph:caret-down-bold" height="0.8em" />
-            </button>
-          </div>
-        </div>
-
-        {/* Pagination Controls */}
-        <div className="flex items-center gap-1.5">
-          <button
-            type="button"
-            className="p-1.5 rounded border border-gray-200 text-gray-400 hover:text-gray-700 hover:bg-gray-50 cursor-pointer"
-          >
-            <Icon icon="ph:caret-left-bold" height="0.9em" />
-          </button>
-          <button
-            type="button"
-            className="w-7 h-7 rounded-lg bg-red-700 text-white font-bold flex items-center justify-center cursor-pointer shadow-xs"
-          >
-            1
-          </button>
-          <button
-            type="button"
-            className="w-7 h-7 rounded-lg text-gray-600 hover:bg-gray-100 flex items-center justify-center cursor-pointer"
-          >
-            2
-          </button>
-          <button
-            type="button"
-            className="w-7 h-7 rounded-lg text-gray-600 hover:bg-gray-100 flex items-center justify-center cursor-pointer"
-          >
-            3
-          </button>
-          <span className="px-1 text-gray-400">...</span>
-          <button
-            type="button"
-            className="w-7 h-7 rounded-lg text-gray-600 hover:bg-gray-100 flex items-center justify-center cursor-pointer"
-          >
-            128
-          </button>
-          <button
-            type="button"
-            className="p-1.5 rounded border border-gray-200 text-gray-400 hover:text-gray-700 hover:bg-gray-50 cursor-pointer"
-          >
-            <Icon icon="ph:caret-right-bold" height="0.9em" />
-          </button>
-        </div>
-      </div>
+      
     </div>
   );
 };

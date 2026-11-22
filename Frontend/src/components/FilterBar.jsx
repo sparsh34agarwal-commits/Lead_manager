@@ -12,17 +12,17 @@ const FilterBar = (props) => {
 
   const statusPills = [
     { id: "all", label: "All Statuses", count: totalLeads },
-    { id: "new", label: "New", count: newLeads, badgeColor: "bg-red-100 text-red-600" },
-    { id: "contacted", label: "Contacted", count: contactedLeads, badgeColor: "bg-cyan-100 text-cyan-700" },
-    { id: "qualified", label: "Qualified", count: qualifiedLeads, badgeColor: "bg-emerald-100 text-emerald-700" },
-    { id: "lost", label: "Lost", count: lostLeads, badgeColor: "bg-rose-100 text-rose-600" },
+    { id: "New", label: "New", count: newLeads, badgeColor: "bg-red-100 text-red-600" },
+    { id: "Contacted", label: "Contacted", count: contactedLeads, badgeColor: "bg-cyan-100 text-cyan-700" },
+    { id: "Qualified", label: "Qualified", count: qualifiedLeads, badgeColor: "bg-emerald-100 text-emerald-700" },
+    { id: "Lost", label: "Lost", count: lostLeads, badgeColor: "bg-rose-100 text-rose-600" },
   ];
 
   return (
     <div className="p-5 pb-3 flex flex-col gap-4 border-b border-gray-100">
       {/* Top Filter Row: Search & Dropdowns */}
       <div className="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-3">
-        {/* Search input with shortcut badge */}
+        {/* Search input */}
         <div className="relative flex-1 max-w-lg">
           <Icon
             icon="ph:magnifying-glass-bold"
@@ -38,49 +38,6 @@ const FilterBar = (props) => {
           />
         </div>
 
-        {/* Dropdowns */}
-        <div className="flex flex-wrap items-center gap-2.5">
-          {/* Source Dropdown */}
-          <Icon icon="ph:funnel-bold" className="text-gray-500" height="1.1em" />
-          <label className="text-[14px] font-semibold text-gray-700">Sources</label>
-          <select
-          value={props.ActiveSource}
-          onChange={(e)=>{props.setActiveSource(e.target.value)}}
-           className="border border-gray-200 rounded-xl px-3 py-2 text-xs font-semibold text-gray-700"
-          >
-            <option className="text-xs font-semibold text-gray-700" value="all">All</option>
-            <option className="text-xs font-semibold text-gray-700" value="Website">Website</option>
-            <option className="text-xs font-semibold text-gray-700" value="LinkedIn">LinkedIn</option>
-            <option className="text-xs font-semibold text-gray-700" value="Referral">Referral</option>
-            <option className="text-xs font-semibold text-gray-700" value="ColdCall">ColdCall</option>
-            <option className="text-xs font-semibold text-gray-700" value="Other">Other</option>
-          </select>
-
-          {/* Date Range Dropdown */}
-          <button
-            type="button"
-            className="flex items-center gap-2 px-3.5 py-2 text-xs font-semibold text-gray-700 bg-white border border-gray-200 rounded-xl hover:bg-gray-50 cursor-pointer transition shadow-2xs"
-          >
-            <Icon icon="ph:calendar-blank-bold" className="text-gray-500" height="1.1em" />
-            <span>Last 30 Days</span>
-            <Icon icon="ph:caret-down-bold" className="text-gray-400" height="0.9em" />
-          </button>
-
-          {/* Sort Dropdown */}
-          <button
-            type="button"
-            className="flex items-center gap-2 px-3.5 py-2 text-xs font-semibold text-gray-700 bg-white border border-gray-200 rounded-xl hover:bg-gray-50 cursor-pointer transition shadow-2xs"
-          >
-            <Icon icon="ph:arrows-down-up-bold" className="text-gray-500" height="1.1em" />
-            <span>Sort: Recent Activity</span>
-            <Icon icon="ph:caret-down-bold" className="text-gray-400" height="0.9em" />
-          </button>
-        </div>
-      </div>
-
-      {/* Bottom Filter Row: Status buttons */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pt-2">
-        {/* Status buttons */}
         <div className="flex flex-wrap items-center gap-1.5 bg-[#F2F5F3] p-1 rounded-xl">
           {statusPills.map((pill) => {
             const isActive = props.ActiveStatus === pill.id;
@@ -109,7 +66,27 @@ const FilterBar = (props) => {
             );
           })}
         </div>
+
+        {/* Dropdowns */}
+        <div className="flex flex-wrap items-center gap-2.5">
+          {/* Source Dropdown */}
+          <Icon icon="ph:funnel-bold" className="text-gray-500" height="1.1em" />
+          <label className="text-[14px] font-semibold text-gray-700">Sources</label>
+          <select
+          value={props.ActiveSource}
+          onChange={(e)=>{props.setActiveSource(e.target.value)}}
+           className="border border-gray-200 rounded-xl px-3 py-2 text-xs font-semibold text-gray-700"
+          >
+            <option className="text-xs font-semibold text-gray-700" value="all">All</option>
+            <option className="text-xs font-semibold text-gray-700" value="Website">Website</option>
+            <option className="text-xs font-semibold text-gray-700" value="LinkedIn">LinkedIn</option>
+            <option className="text-xs font-semibold text-gray-700" value="Referral">Referral</option>
+            <option className="text-xs font-semibold text-gray-700" value="ColdCall">ColdCall</option>
+            <option className="text-xs font-semibold text-gray-700" value="Other">Other</option>
+          </select>
+        </div>
       </div>
+
     </div>
   );
 };

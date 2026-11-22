@@ -36,7 +36,7 @@ const getLeads = async (req, res) => {
     try {
         const leads = await leadModel.find({
             owner: req.user.id
-        }).sort({ createdAt: -1 }).populate("owner", "name email");
+        }).sort({ createdAt: -1 });
 
         return res.status(200).json({
             leads
