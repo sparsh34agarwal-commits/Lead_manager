@@ -21,6 +21,17 @@ A full stack lead management application built for the Meru Technosoft Full Stac
 - Created/updated timestamps displayed as last activity.
 - Frontend form constraints and Mongoose schema validation.
 
+## Important Note
+The backend is hosted on Render's free tier, which automatically
+spins down after 15 minutes of inactivity.
+
+As a result, the first API request after a period of inactivity
+may take approximately 1 minute while the server wakes up.
+Subsequent requests should respond normally.
+
+This is an expected limitation of the free hosting plan and
+does not indicate an issue with the application.
+
 
 ## Assumptions and scope
 
